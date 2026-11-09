@@ -1,5 +1,8 @@
 ﻿import createNextIntlPlugin from "next-intl/plugin";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const SECURITY_HEADERS = [
@@ -41,6 +44,10 @@ const nextConfig = {
     resolveAlias: {
       "@app-messages": `./messages/${APP_LOCALE}.json`,
     },
+  },
+  webpack: (config) => {
+    config.resolve.alias["@app-messages"] = path.resolve(__dirname, `messages/${APP_LOCALE}.json`);
+    return config;
   },
   output: "standalone",
   experimental: {
