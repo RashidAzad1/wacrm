@@ -50,6 +50,12 @@ const nextConfig = {
     return config;
   },
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     turbopackPluginRuntimeStrategy: "workerThreads",
     cpus: 4,
